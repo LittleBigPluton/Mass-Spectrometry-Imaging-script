@@ -112,6 +112,6 @@ plot.create_data_frame()
 # Give desired molecule
 plot.set_molecule(molecule)
 # Normalize the data by TIC
-#plot.normalize_by_TIC()
+plot.normalize_by_TIC(all=False)
 # Plot normalized data using heatmap method
-plot.plot_heatmap(show = True,save=True)
+plot.plot_heatmap(molecule, show = True,save=True)
