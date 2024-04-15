@@ -1,6 +1,6 @@
-###############################
-#####   Import Libraries  #####
-###############################
+##################################
+#####    Import Libraries    #####
+##################################
 
 import pandas as pd
 import io
@@ -38,7 +38,7 @@ class data_process:
             print(self.data.head())
             print(self.data.shape)
             # Extract mz values from the column names
-            self.mz_values = self.data.columns[2:]
+            self.mz_values = self.data.columns[4:]
 
         except FileNotFoundError as e:
             print("File not found. Please check the file path and try again.")
@@ -73,11 +73,15 @@ class data_process:
         except KeyError as e:
             print(f"Error removing columns: {e}")
 
-    def normalize_by_TIC(self):
+    def normalize_by_TIC(self, all = True):
         # Calculate Total Ion Current (TIC) for normalization
         # Create a new column names as TIC and store whole total intensities by coordinates
         self.data["TIC"] = self.data[self.mz_values].sum(axis=1)
-        # To normalize all data, uncomment the following code but computation time is longer
-        # self.data[self.mz_values=self.data[self.mz_values].div(self.data["TIC"], axis=0)
-        # TO normalize just one molecule by TIC
-        self.data[self.molecule] = self.data[self.molecule].div(self.data["TIC"], axis = 0)
+        if all:
+            # To normalize all data, uncomment the following code but computation time is longer
+            self.data[self.mz_values]=self.data[self.mz_values].div(self.data["TIC"], axis=0)
+        else:
+            # TO normalize just one molecule by TIC
+            self.data[self.molecule] = self.data[self.molecule].div(self.data["TIC"], axis = 0)
+        self.data = self.data.fillna(0)
+        print(self.data.head())
