@@ -1,5 +1,5 @@
 # Import libraries
-import visualization as vs
+import msi_visualization.visualization as vs
 import pandas as pd
 import io
 #######################################

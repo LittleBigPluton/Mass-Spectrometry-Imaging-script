@@ -4,7 +4,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 # Import data processing library in order to build on top
-from processing import data_process
+from msi_visualization.processing import data_process
 import matplotlib.patches as mpatches
 
 ####################################
